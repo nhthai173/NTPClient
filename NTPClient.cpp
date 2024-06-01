@@ -163,6 +163,30 @@ String NTPClient::getFormattedTime() const {
   return hoursStr + ":" + minuteStr + ":" + secondStr;
 }
 
+int NTPClient::getYear() {
+    time_t rawtime = this->getEpochTime();
+    struct tm * ti;
+    ti = localtime (&rawtime);
+    int year = ti->tm_year + 1900;
+
+    return year;
+}
+
+int NTPClient::getMonth() {
+    time_t rawtime = this->getEpochTime();
+    struct tm * ti;
+    ti = localtime (&rawtime);
+
+    return ti->tm_mon + 1;
+}
+
+int NTPClient::getDate() {
+    time_t rawtime = this->getEpochTime();
+    struct tm * ti;
+    ti = localtime (&rawtime);
+    return ti->tm_mday;
+}
+
 void NTPClient::end() {
   this->_udp->stop();
 

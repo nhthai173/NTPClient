@@ -1,3 +1,7 @@
+NTPClient 3.3.0 - 2024.06.01
+
+* Added getDate(), getMonth(), getYear()
+
 NTPClient 3.1.0 - 2016.05.31
 
 * Added functions for changing the timeOffset and updateInterval later. Thanks @SirUli

@@ -3,6 +3,7 @@
 #include "Arduino.h"
 
 #include <Udp.h>
+#include <time.h>
 
 #define SEVENZYYEARS 2208988800UL
 #define NTP_PACKET_SIZE 48
@@ -101,6 +102,27 @@ class NTPClient {
      * @return time formatted like `hh:mm:ss`
      */
     String getFormattedTime() const;
+
+    /**
+     * @brief Get current year
+     * 
+     * @return int 
+     */
+    int getYear();
+
+    /**
+     * @brief Get current month
+     * 
+     * @return int 
+     */
+    int getMonth();
+    
+    /**
+     * @brief Get current date
+     * 
+     * @return int 
+     */
+    int getDate();
 
     /**
      * @return time in seconds since Jan. 1, 1970
