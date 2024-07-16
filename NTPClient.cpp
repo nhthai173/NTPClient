@@ -163,6 +163,44 @@ String NTPClient::getFormattedTime() const {
   return hoursStr + ":" + minuteStr + ":" + secondStr;
 }
 
+String NTPClient::getFormattedDateTime(String dateFormat) {
+    const String days[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    const String months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    const String shortDays[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+    const String shortMonths[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    
+    time_t rawtime = this->getEpochTime();
+    struct tm * ti;
+    ti = localtime (&rawtime);
+    int year = ti->tm_year + 1900;
+    int month = ti->tm_mon + 1;
+    int day = ti->tm_mday;
+    int dow = ti->tm_wday;
+    int hour = ti->tm_hour;
+    int min = ti->tm_min;
+    int sec = ti->tm_sec;
+
+    String formattedDate = dateFormat;
+    formattedDate.replace("yyyy", String(year));
+    formattedDate.replace("yy", String(year).substring(2));
+    formattedDate.replace("MMMM", months[month - 1]);
+    formattedDate.replace("MMM", shortMonths[month - 1]);
+    formattedDate.replace("MM", month < 10 ? "0" + String(month) : String(month));
+    formattedDate.replace("M", String(month));
+    formattedDate.replace("EEEE", days[dow]);
+    formattedDate.replace("E", shortDays[dow]);
+    formattedDate.replace("dd", day < 10 ? "0" + String(day) : String(day));
+    formattedDate.replace("d", String(day));
+    formattedDate.replace("hh", hour < 10 ? "0" + String(hour) : String(hour));
+    formattedDate.replace("h", String(hour));
+    formattedDate.replace("mm", min < 10 ? "0" + String(min) : String(min));
+    formattedDate.replace("m", String(min));
+    formattedDate.replace("ss", sec < 10 ? "0" + String(sec) : String(sec));
+    formattedDate.replace("s", String(sec));
+    
+    return formattedDate;
+}
+
 int NTPClient::getYear() {
     time_t rawtime = this->getEpochTime();
     struct tm * ti;
