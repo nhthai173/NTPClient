@@ -106,28 +106,28 @@ class NTPClient {
     /**
      * @return date formatted like `yyyy-MM-dd`
      */
-    String getFormattedDateTime(String dateFormat = "yyyy-MM-dd hh:mm:ss") const;
+    String getFormattedDateTime(String dateFormat = "yyyy-MM-dd hh:mm:ss", uint32_t unix = 0) const;
 
     /**
      * @brief Get current year
      * 
      * @return int 
      */
-    int getYear();
+    int getYear() const;
 
     /**
      * @brief Get current month
      * 
      * @return int 
      */
-    int getMonth();
+    int getMonth() const;
     
     /**
      * @brief Get current date
      * 
      * @return int 
      */
-    int getDate();
+    int getDate() const;
 
     /**
      * @return time in seconds since Jan. 1, 1970
