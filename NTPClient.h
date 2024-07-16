@@ -106,7 +106,7 @@ class NTPClient {
     /**
      * @return date formatted like `yyyy-MM-dd`
      */
-    String getFormattedDateTime(String dateFormat = "yyyy-MM-dd hh:mm:ss") const;
+    String getFormattedDateTime(String dateFormat = "yyyy-MM-dd hh:mm:ss", uint32_t unix = 0) const;
 
     /**
      * @brief Get current year

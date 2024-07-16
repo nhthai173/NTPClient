@@ -163,13 +163,17 @@ String NTPClient::getFormattedTime() const {
   return hoursStr + ":" + minuteStr + ":" + secondStr;
 }
 
-String NTPClient::getFormattedDateTime(String dateFormat) {
+String NTPClient::getFormattedDateTime(String dateFormat, uint32_t unix) const {
     const String days[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     const String months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     const String shortDays[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
     const String shortMonths[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     
-    time_t rawtime = this->getEpochTime();
+    time_t rawtime = unix;
+    if (unix == 0) {
+        rawtime = this->getEpochTime();
+    }
+
     struct tm * ti;
     ti = localtime (&rawtime);
     int year = ti->tm_year + 1900;
@@ -191,8 +195,8 @@ String NTPClient::getFormattedDateTime(String dateFormat) {
     formattedDate.replace("E", shortDays[dow]);
     formattedDate.replace("dd", day < 10 ? "0" + String(day) : String(day));
     formattedDate.replace("d", String(day));
-    formattedDate.replace("hh", hour < 10 ? "0" + String(hour) : String(hour));
-    formattedDate.replace("h", String(hour));
+    formattedDate.replace("HH", hour < 10 ? "0" + String(hour) : String(hour));
+    formattedDate.replace("H", String(hour));
     formattedDate.replace("mm", min < 10 ? "0" + String(min) : String(min));
     formattedDate.replace("m", String(min));
     formattedDate.replace("ss", sec < 10 ? "0" + String(sec) : String(sec));
